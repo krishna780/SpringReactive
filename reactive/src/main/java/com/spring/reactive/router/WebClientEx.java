@@ -22,7 +22,6 @@ public class WebClientEx {
     public WebClient webClient(){
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient()))
-                .baseUrl("https://jsonplaceholder.typicode.com/")
                 .defaultCookie("cookieKey", "cookieVal")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE,
                         MediaType.APPLICATION_JSON_VALUE)
@@ -32,8 +31,12 @@ public class WebClientEx {
         return HttpClient.create().option(
                 ChannelOption.CONNECT_TIMEOUT_MILLIS,5000)
                 .responseTimeout(Duration.ofMillis(5000))
+                .secure()
                 .doOnConnected(connection -> connection.addHandlerLast(
-                        new ReadTimeoutHandler(5000, TimeUnit.MICROSECONDS))
-                        .addHandlerLast(new WriteTimeoutHandler(5000,TimeUnit.MILLISECONDS)));
+                        new ReadTimeoutHandler(5000,
+                                TimeUnit.MICROSECONDS))
+                        .addHandlerLast(new WriteTimeoutHandler(5000,
+                                TimeUnit.MILLISECONDS)));
+
     }
 }
