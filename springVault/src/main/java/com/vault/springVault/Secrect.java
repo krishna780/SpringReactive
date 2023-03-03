@@ -1,2 +1,13 @@
-package com.vault.springVault;public class Secrect {
+package com.vault.springVault;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Secrect {
+    private String username;
+    private  String password;
 }
